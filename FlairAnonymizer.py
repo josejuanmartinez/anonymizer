@@ -3,6 +3,10 @@ from flair.models import SequenceTagger
 
 from Anonymizer import Anonymizer
 
+from pathlib import Path
+import flair
+
+flair.cache_root = Path("/data/cache/.flair")# WORKS
 
 class FlairAnonymizer(Anonymizer):
     def __init__(self):

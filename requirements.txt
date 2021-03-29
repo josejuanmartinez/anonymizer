@@ -12,8 +12,8 @@
 # https://github.com/explosion/spacy-models/releases/download/es_dep_news_trf-3.0.0/es_dep_news_trf-3.0.0-py3-none-any.whl
 
 # FlairAnonymizer
-# flair==0.8.0
+flair==0.8.0
 
 # RUPERTA
-torch==1.8.1
-transformers==4.4.2
+# torch==1.8.1
+# transformers==4.4.2
