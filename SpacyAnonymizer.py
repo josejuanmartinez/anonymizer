@@ -17,6 +17,6 @@ class SpacyAnonymizer(Anonymizer):
         ents = [(ent.text, ent.label_) for ent in doc.ents if ent.label_ in self.entities]
         for ent in ents:
             text = text.replace(ent[0], ent[1])
-        print(text)
+        return text
 
 

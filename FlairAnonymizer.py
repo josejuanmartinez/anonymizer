@@ -25,4 +25,4 @@ class FlairAnonymizer(Anonymizer):
         ents = [(ent.to_original_text(), ent.tag) for ent in sentence.get_spans('ner') if ent.tag in self.entities]
         for ent in ents:
             text = text.replace(ent[0], ent[1])
-        print(text)
+        return text
