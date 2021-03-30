@@ -9,7 +9,7 @@
 # SpacyAnonymizer
 spacy==3.0.5
 https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.0.0/en_core_web_trf-3.0.0-py3-none-any.whl
-# https://github.com/explosion/spacy-models/releases/download/es_core_news_md-3.0.0/es_core_news_md-3.0.0-py3-none-any.whl
+https://github.com/explosion/spacy-models/releases/download/es_core_news_md-3.0.0/es_core_news_md-3.0.0-py3-none-any.whl
 # https://github.com/explosion/spacy-models/releases/download/es_dep_news_trf-3.0.0/es_dep_news_trf-3.0.0-py3-none-any.whl
 
 # FlairAnonymizer
