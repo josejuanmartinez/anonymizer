@@ -7,9 +7,9 @@ OTHERS_DATA = os.path.join(DATA_DIR, 'Otros')
 
 
 entities = {
-    'LOC': 'Lugar',
-    'PERSON': 'Persona',
-    'GPE': 'Lugar',
-    'DATE': 'Fecha',
-    'TIME': 'Hora'
+    'LOC': '<LOC>', # Flair ES
+    'PER': '<PER>', # FLair ES
+    'GPE': '<GPE>', # Spacy EN
+    'DATE': '<DATE>', # Spacy EN
+    'TIME': '<TIME>' # Spacy EN
 }
