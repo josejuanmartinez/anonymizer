@@ -1,4 +1,4 @@
-class Anonymizer:
+class BaseAnonymizer:
     def __init__(self):
         pass
 

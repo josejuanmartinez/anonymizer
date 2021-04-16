@@ -1,9 +1,9 @@
 from deeppavlov import configs, build_model
 
-from Anonymizer import Anonymizer
+from BaseAnonymizer import BaseAnonymizer
 
 
-class PavlovAnonymizer(Anonymizer):
+class PavlovAnonymizer(BaseAnonymizer):
     def __init__(self):
         self.ner_model = build_model(configs.ner.ner_ontonotes_bert_mult, download=True)
         super().__init__()

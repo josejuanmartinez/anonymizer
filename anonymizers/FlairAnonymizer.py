@@ -2,18 +2,18 @@ import flair
 from flair.data import Sentence
 from flair.models import SequenceTagger
 
-from Anonymizer import Anonymizer
+from BaseAnonymizer import BaseAnonymizer
 
 from pathlib import Path
 
 
-from Entities import Entities
+from entities import Entities
 
 """ Configure cache dir"""
 flair.cache_root = Path("/data/cache/.flair")
 
 
-class FlairAnonymizer(Anonymizer):
+class FlairAnonymizer(BaseAnonymizer):
     def __init__(self):
         self.entities = [Entities.PER.name, Entities.LOC.name, Entities.DATE.name, Entities.TIME.name, Entities.GPE.name]
         self.taggers = [SequenceTagger.load("flair/ner-spanish-large"),

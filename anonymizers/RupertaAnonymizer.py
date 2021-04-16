@@ -1,10 +1,10 @@
 import torch
 from transformers import AutoModelForTokenClassification, AutoTokenizer
 
-from Anonymizer import Anonymizer
+from BaseAnonymizer import BaseAnonymizer
 
 
-class RupertaAnonymizer(Anonymizer):
+class RupertaAnonymizer(BaseAnonymizer):
     NER_TAGS = {
         "0": "B-LOC",
         "1": "B-MISC",

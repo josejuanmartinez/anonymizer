@@ -5,7 +5,7 @@ DATA_DIR = os.path.join(ROOT_DIR, 'data')
 ONCOLOGY_DATA = os.path.join(DATA_DIR, 'Oncologia')
 OTHERS_DATA = os.path.join(DATA_DIR, 'Otros')
 OUT_DATA = os.path.join(DATA_DIR, 'out')
-
+SONESPASES = os.path.join(DATA_DIR, 'SonEspases')
 
 entities = {
     'LOC': '<LOC>', # Flair ES

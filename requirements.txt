@@ -18,3 +18,7 @@ https://github.com/explosion/spacy-models/releases/download/es_core_news_md-3.0.
 # RUPERTA
 # torch==1.8.1
 # transformers==4.4.2
+
+PyPDF2~=1.26.0
+torch~=1.8.1
+transformers~=4.2.2
