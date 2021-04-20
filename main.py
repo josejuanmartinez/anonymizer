@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import os
 
 from RegexAnonymizer import RegexAnonymizer
