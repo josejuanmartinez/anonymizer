@@ -36,7 +36,7 @@ async def pdf_extract(request):
 async def pdf_extract_bulk(request):
     pdf_processor = PDFProcessor()
     for filename in os.listdir(INPUT_DIR):
-        with open(os.path.join(INPUT_DIR, filename), 'r') as f:
+        with open(os.path.join(INPUT_DIR, filename), 'rb') as f:
             ext = os.path.splitext(filename)[-1].lower()
             if ext.lower() != '.pdf':
                 continue
@@ -87,7 +87,7 @@ async def pdf_extract_anonymize_bulk(request):
     regex_anonymizer = RegexAnonymizer()
 
     for filename in os.listdir(INPUT_DIR):
-        with open(os.path.join(INPUT_DIR, filename), 'r') as f:
+        with open(os.path.join(INPUT_DIR, filename), 'rb') as f:
             ext = os.path.splitext(filename)[-1].lower()
             if ext.lower() != '.pdf':
                 continue
