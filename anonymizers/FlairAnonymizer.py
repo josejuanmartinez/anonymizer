@@ -2,7 +2,7 @@ import flair
 from flair.data import Sentence
 from flair.models import SequenceTagger
 
-from BaseAnonymizer import BaseAnonymizer
+from anonymizers.BaseAnonymizer import BaseAnonymizer
 
 from pathlib import Path
 
