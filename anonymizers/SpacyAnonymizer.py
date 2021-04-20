@@ -1,10 +1,10 @@
 import spacy
 
-from Anonymizer import Anonymizer
-from Entities import Entities
+from BaseAnonymizer import BaseAnonymizer
+from entities import Entities
 
 
-class SpacyAnonymizer(Anonymizer):
+class SpacyAnonymizer(BaseAnonymizer):
     def __init__(self):
         # I'm using an English NER with DATES
         self.entities = [Entities.DATE.name, Entities.TIME.name, Entities.GPE.name]

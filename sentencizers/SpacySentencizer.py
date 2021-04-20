@@ -1,7 +1,7 @@
 import spacy
 
 
-class Sentencizer:
+class SpacySentencizer:
     def __init__(self):
         self.nlp = spacy.load("es_core_news_md")
         self.nlp.disable_pipe("parser")

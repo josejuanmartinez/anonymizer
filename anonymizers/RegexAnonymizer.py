@@ -1,6 +1,6 @@
 import re
 
-from Entities import Entities
+from entities import Entities
 
 
 class Anonimizer(object):
