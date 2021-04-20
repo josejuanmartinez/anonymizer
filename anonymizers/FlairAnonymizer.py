@@ -15,9 +15,10 @@ flair.cache_root = Path("/data/cache/.flair")
 
 class FlairAnonymizer(BaseAnonymizer):
     def __init__(self):
-        self.entities = [ESEntities.PER.name, ESEntities.LOC.name, ESEntities.DATE.name, ESEntities.TIME.name, ESEntities.GPE.name]
+        self.entities = [ESEntities.PER.name, ESEntities.LOC.name, ESEntities.DATE.name, ESEntities.TIME.name,
+                         ESEntities.GPE.name]
         self.taggers = [SequenceTagger.load("flair/ner-spanish-large"),
-                        SequenceTagger.load("flair/ner-english-ontonotes-large")]
+                        SequenceTagger.load("flair/ner-english-ontonotes-fast")]
         super().__init__()
 
     def anonymize(self, text):
