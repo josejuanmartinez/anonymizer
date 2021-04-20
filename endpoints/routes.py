@@ -33,7 +33,7 @@ async def pdf_extract(request):
 
 
 @routes.post('/anonymizer/pdf/extract/bulk')
-async def pdf_extract(request):
+async def pdf_extract_bulk(request):
     pdf_processor = PDFProcessor()
     for filename in os.listdir(INPUT_DIR):
         with open(os.path.join(INPUT_DIR, filename), 'r') as f:
@@ -77,7 +77,7 @@ async def pdf_extract_anonymize(request):
 
 
 @routes.post('/anonymizer/pdf/extract/anonymize/bulk')
-async def pdf_extract(request):
+async def pdf_extract_anonymize_bulk(request):
     pdf_processor = PDFProcessor()
     sentencizer = SpacySentencizer()
     flair_anonymizer = FlairAnonymizer()
