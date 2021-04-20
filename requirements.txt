@@ -10,7 +10,7 @@ flair==0.8.0
 
 # Other
 PyPDF2~=1.26.0
-torch~=1.8.1
+torch~=1.7.1
 transformers~=4.2.2
 aiohttp~=3.7.4.post0
 aiohttp-cors==0.7.0
