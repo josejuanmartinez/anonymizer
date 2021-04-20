@@ -1,20 +1,21 @@
 import re
 
-from entities import Entities
+from anonymizers.BaseAnonymizer import BaseAnonymizer
+from esentities import ESEntities
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 
-class Anonimizer(object):
-    pass
-
-
-class RegexAnonymizer(Anonimizer):
+class RegexAnonymizer(BaseAnonymizer):
     def __init__(self):
-        self.entities = [Entities.PHONES, Entities.PHONE, Entities.EMAIL, Entities.DOCUMENT, Entities.NIE, Entities.NIF,
-                         Entities.PASSPORT]
+        self.entities = [ESEntities.PHONES, ESEntities.PHONE, ESEntities.EMAIL, ESEntities.DOCUMENT, ESEntities.NIE,
+                         ESEntities.NIF, ESEntities.PASSPORT, ESEntities.SOCIAL, ESEntities.HISTORY]
+        super().__init__()
 
-    def anonynimize(self, text):
+    def anonymize(self, text):
         for ent in self.entities:
-            if re.search(Entities.get_regex(ent), text):
-                print(f"Found: {text} replaced with {ent.name}")
-                text = re.sub(Entities.get_regex(ent), ent.name, text)
+            if re.search(ESEntities.get_regex(ent), text):
+                logging.info(f"Found: {text} replaced with {ent.name}")
+                text = re.sub(ESEntities.get_regex(ent), ent.name, text)
         return text

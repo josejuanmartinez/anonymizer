@@ -14,3 +14,5 @@ entities = {
     'DATE': '<DATE>', # Spacy EN
     'TIME': '<TIME>' # Spacy EN
 }
+
+NEWPAGE = '<<==NEWPAGE==>>'

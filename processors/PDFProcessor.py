@@ -1,6 +1,7 @@
 import PyPDF2
 
 from cleanser.Cleanser import Cleanser
+from constants import NEWPAGE
 
 
 class PDFProcessor:
@@ -14,4 +15,4 @@ class PDFProcessor:
         for i in range(0, reader.getNumPages()):
             all_text.append(Cleanser.clean(reader.getPage(i).extractText()))
 
-        return '\n\n'.join(all_text)
+        return NEWPAGE.join(all_text)

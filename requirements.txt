@@ -1,24 +1,13 @@
-# Execute this way to retrieve spacy wheels from release
-# pip install --trusted-host github.com --trusted-host github-releases.githubusercontent.com -r requirements.txt
-
-# DeepPavlovAnonymizer
-# deeppavlov==0.14.0
-# git+https://github.com/deepmipt/bert.git@feat/multi_gpu
-# tensorflow==1.15.2
-
 # SpacyAnonymizer
 spacy==3.0.5
 https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.0.0/en_core_web_trf-3.0.0-py3-none-any.whl
-https://github.com/explosion/spacy-models/releases/download/es_core_news_md-3.0.0/es_core_news_md-3.0.0-py3-none-any.whl
-# https://github.com/explosion/spacy-models/releases/download/es_dep_news_trf-3.0.0/es_dep_news_trf-3.0.0-py3-none-any.whl
 
 # FlairAnonymizer
-# flair==0.8.0
+flair==0.8.0
 
-# RUPERTA
-# torch==1.8.1
-# transformers==4.4.2
-
+# Other
 PyPDF2~=1.26.0
 torch~=1.8.1
 transformers~=4.2.2
+aiohttp~=3.7.4.post0
+aiohttp-cors==0.7.0

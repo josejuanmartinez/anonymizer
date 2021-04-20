@@ -1,13 +1,13 @@
 import spacy
 
 from BaseAnonymizer import BaseAnonymizer
-from entities import Entities
+from esentities import ESEntities
 
 
 class SpacyAnonymizer(BaseAnonymizer):
     def __init__(self):
         # I'm using an English NER with DATES
-        self.entities = [Entities.DATE.name, Entities.TIME.name, Entities.GPE.name]
+        self.entities = [ESEntities.DATE.name, ESEntities.TIME.name, ESEntities.GPE.name]
         self.nlp = spacy.load("en_core_web_trf")
         super().__init__()
 

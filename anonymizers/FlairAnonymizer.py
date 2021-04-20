@@ -7,7 +7,7 @@ from BaseAnonymizer import BaseAnonymizer
 from pathlib import Path
 
 
-from entities import Entities
+from esentities import ESEntities
 
 """ Configure cache dir"""
 flair.cache_root = Path("/data/cache/.flair")
@@ -15,7 +15,7 @@ flair.cache_root = Path("/data/cache/.flair")
 
 class FlairAnonymizer(BaseAnonymizer):
     def __init__(self):
-        self.entities = [Entities.PER.name, Entities.LOC.name, Entities.DATE.name, Entities.TIME.name, Entities.GPE.name]
+        self.entities = [ESEntities.PER.name, ESEntities.LOC.name, ESEntities.DATE.name, ESEntities.TIME.name, ESEntities.GPE.name]
         self.taggers = [SequenceTagger.load("flair/ner-spanish-large"),
                         SequenceTagger.load("flair/ner-english-ontonotes-large")]
         super().__init__()
