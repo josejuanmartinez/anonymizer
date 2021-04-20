@@ -1,11 +1,12 @@
+import os
 from io import BytesIO
 
 from aiohttp import web
 
-# from anonymizers.FlairAnonymizer import FlairAnonymizer
 from anonymizers.FlairAnonymizer import FlairAnonymizer
 from anonymizers.RegexAnonymizer import RegexAnonymizer
 from cleanser.Cleanser import Cleanser
+from constants import INPUT_DIR, OUTPUT_DIR
 from processors.PDFProcessor import PDFProcessor
 from sentencizers.SpacySentencizer import SpacySentencizer
 
@@ -29,6 +30,18 @@ async def pdf_extract(request):
     pdf_processor = PDFProcessor()
 
     return web.Response(text=pdf_processor.get_text(BytesIO(pdf_content)))
+
+
+@routes.post('/anonymizer/pdf/extract/bulk')
+async def pdf_extract(request):
+    pdf_processor = PDFProcessor()
+    for filename in os.listdir(INPUT_DIR):
+        with open(os.path.join(INPUT_DIR, filename), 'r') as f:
+            text = pdf_processor.get_text(f)
+            with open(os.path.join(OUTPUT_DIR, filename + '.extracted.txt'), 'w') as f2:
+                f2.write(text)
+
+    return web.Response(text="{\"status\": \"OK\"}")
 
 
 @routes.post('/anonymizer/pdf/extract/anonymize')
@@ -61,6 +74,28 @@ async def pdf_extract_anonymize(request):
         sents.append(clean_sent_flair_regex)
 
     return web.Response(text="\n".join(sents))
+
+
+@routes.post('/anonymizer/pdf/extract/anonymize/bulk')
+async def pdf_extract(request):
+    pdf_processor = PDFProcessor()
+    sentencizer = SpacySentencizer()
+    flair_anonymizer = FlairAnonymizer()
+    regex_anonymizer = RegexAnonymizer()
+
+    for filename in os.listdir(INPUT_DIR):
+        with open(os.path.join(INPUT_DIR, filename), 'r') as f:
+            text = pdf_processor.get_text(f)
+            sents = []
+            for sent in sentencizer.sentencize(text):
+                clean_sent = Cleanser.clean(str(sent))
+                clean_sent_flair = flair_anonymizer.anonymize(clean_sent)
+                clean_sent_flair_regex = regex_anonymizer.anonymize(clean_sent_flair)
+                sents.append(clean_sent_flair_regex)
+            with open(os.path.join(OUTPUT_DIR, filename + '.extracted.anonymized.txt'), 'w') as f2:
+                f2.write("\n".join(sents))
+
+    return web.Response(text="{\"status\": \"OK\"}")
 
 
 @routes.post('/anonymizer/txt/anonymize')
