@@ -37,6 +37,9 @@ async def pdf_extract_bulk(request):
     pdf_processor = PDFProcessor()
     for filename in os.listdir(INPUT_DIR):
         with open(os.path.join(INPUT_DIR, filename), 'r') as f:
+            ext = os.path.splitext(filename)[-1].lower()
+            if ext.lower() != '.pdf':
+                continue
             text = pdf_processor.get_text(f)
             with open(os.path.join(OUTPUT_DIR, filename + '.extracted.txt'), 'w') as f2:
                 f2.write(text)
@@ -85,6 +88,9 @@ async def pdf_extract_anonymize_bulk(request):
 
     for filename in os.listdir(INPUT_DIR):
         with open(os.path.join(INPUT_DIR, filename), 'r') as f:
+            ext = os.path.splitext(filename)[-1].lower()
+            if ext.lower() != '.pdf':
+                continue
             text = pdf_processor.get_text(f)
             sents = []
             for sent in sentencizer.sentencize(text):
