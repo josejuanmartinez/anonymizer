@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+        anonymizer:
+                build:
+                        context: ../
+                        dockerfile: ./docker/Dockerfile
+                image: anonymizer:0.1
+                ports:
+                  - "9090:9090"
+                container_name: anonymizer
