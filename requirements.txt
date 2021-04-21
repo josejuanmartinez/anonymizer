@@ -6,7 +6,7 @@ spacy==3.0.5
 https://github.com/explosion/spacy-models/releases/download/es_core_news_sm-3.0.0/es_core_news_sm-3.0.0-py3-none-any.whl
 
 # Importlib
-importlib==3.10.1
+importlib-metadata==3.10.1
 
 # Numpy
 numpy==1.19.5
