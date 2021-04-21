@@ -9,3 +9,6 @@ services:
                 ports:
                   - "9090:9090"
                 container_name: anonymizer
+                volumes:
+                  - ../input:/opt/anonymizer/input
+                  - ../output:/opt/anonymizer/output
