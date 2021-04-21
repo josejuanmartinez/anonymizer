@@ -9,6 +9,7 @@ from cleanser.Cleanser import Cleanser
 from constants import INPUT_DIR, OUTPUT_DIR
 from processors.PDFProcessor import PDFProcessor
 from sentencizers.SpacySentencizer import SpacySentencizer
+from translators.Translator import Translator
 
 routes = web.RouteTableDef()
 
@@ -41,7 +42,7 @@ async def pdf_extract_bulk(request):
             if ext.lower() != '.pdf':
                 continue
             text = pdf_processor.get_text(f)
-            with open(os.path.join(OUTPUT_DIR, filename + '.extracted.txt'), 'w') as f2:
+            with open(os.path.join(OUTPUT_DIR, filename + '.extracted.txt'), encoding='utf-8', mode='w') as f2:
                 f2.write(text)
 
     return web.Response(text="{\"status\": \"OK\"}")
@@ -98,7 +99,45 @@ async def pdf_extract_anonymize_bulk(request):
                 clean_sent_flair = flair_anonymizer.anonymize(clean_sent)
                 clean_sent_flair_regex = regex_anonymizer.anonymize(clean_sent_flair)
                 sents.append(clean_sent_flair_regex)
-            with open(os.path.join(OUTPUT_DIR, filename + '.extracted.anonymized.txt'), 'w') as f2:
+            with open(os.path.join(OUTPUT_DIR, filename + '.extracted.anonymized.txt'), encoding='utf-8', mode='w') as f2:
+                f2.write("\n".join(sents))
+
+    return web.Response(text="{\"status\": \"OK\"}")
+
+
+@routes.get('/anonymizer/pdf/extract/anonymize/translate/bulk')
+async def pdf_extract_anonymize_translate_bulk(request):
+    from_lang = None
+    if 'from_lang' in request.rel_url.query:
+        from_lang = request.rel_url.query['from_lang']
+
+    to_lang = None
+    if 'to_lang' in request.rel_url.query:
+        to_lang = request.rel_url.query['to_lang']
+
+    if from_lang is None or to_lang is None:
+        return web.HTTPBadRequest()
+
+    pdf_processor = PDFProcessor()
+    sentencizer = SpacySentencizer()
+    flair_anonymizer = FlairAnonymizer()
+    regex_anonymizer = RegexAnonymizer()
+    translator = Translator(from_lang, to_lang)
+
+    for filename in os.listdir(INPUT_DIR):
+        with open(os.path.join(INPUT_DIR, filename), 'rb') as f:
+            ext = os.path.splitext(filename)[-1].lower()
+            if ext.lower() != '.pdf':
+                continue
+            text = pdf_processor.get_text(f)
+            sents = []
+            for sent in sentencizer.sentencize(text):
+                clean_sent = Cleanser.clean(str(sent))
+                clean_sent_flair = flair_anonymizer.anonymize(clean_sent)
+                clean_sent_flair_regex = regex_anonymizer.anonymize(clean_sent_flair)
+                sents.append(translator.translate(clean_sent_flair_regex))
+            with open(os.path.join(OUTPUT_DIR, filename + '.extracted.anonymized.translated_' +
+                                               from_lang + '_' + to_lang + '.txt'), encoding='utf-8', mode='w') as f2:
                 f2.write("\n".join(sents))
 
     return web.Response(text="{\"status\": \"OK\"}")

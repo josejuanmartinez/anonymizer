@@ -23,3 +23,6 @@ PyPDF2~=1.26.0
 # WebServer
 aiohttp~=3.7.4.post0
 aiohttp-cors==0.7.0
+
+# Translator
+translate==3.5.0
