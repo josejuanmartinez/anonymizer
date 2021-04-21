@@ -1,16 +1,25 @@
 # Install with trusted github permissions
 # sudo pip3 install --trusted-host github.com --trusted-host github-releases.githubusercontent.com -r requirements.txt
 
-# SpacyAnonymizer
+# SpacySentencizer
 spacy==3.0.5
-https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.0.0/en_core_web_trf-3.0.0-py3-none-any.whl
+https://github.com/explosion/spacy-models/releases/download/es_core_news_sm-3.0.0/es_core_news_sm-3.0.0-py3-none-any.whl
+
+# Importlib
+importlib==3.10.1
+
+# Numpy
+numpy==1.19.5
 
 # FlairAnonymizer
-flair==0.8.0
-
-# Other
-PyPDF2~=1.26.0
 torch~=1.7.1
 transformers~=4.2.2
+flair==0.8.0
+
+
+# PDFExtractor
+PyPDF2~=1.26.0
+
+# WebServer
 aiohttp~=3.7.4.post0
 aiohttp-cors==0.7.0
