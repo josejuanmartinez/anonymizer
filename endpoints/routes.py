@@ -108,7 +108,7 @@ async def pdf_extract_anonymize_bulk(request):
     return web.Response(text="{\"status\": \"OK\"}")
 
 
-@routes.get('/anonymizer/pdf/extract/anonymize/translate/bulk')
+@routes.get('/anonymizer/pdf/extract/translate/anonymize/bulk')
 async def pdf_extract_anonymize_translate_bulk(request):
     from_lang = None
     if 'from_lang' in request.rel_url.query:
@@ -136,11 +136,11 @@ async def pdf_extract_anonymize_translate_bulk(request):
             text = pdf_processor.get_text(f)
             sents = []
             for sent in sentencizer.sentencize(text):
-                clean_sent = Cleanser.clean(str(sent))
-                clean_sent_flair = flair_anonymizer.anonymize(clean_sent)
-                clean_sent_flair_regex = regex_anonymizer.anonymize(clean_sent_flair)
-                clean_sent_flair_regex_translated = translator.translate(clean_sent_flair_regex)
-                sents.append(clean_sent_flair_regex_translated)
+                trans_sent = translator.translate(str(sent))
+                clean_trans_sent = Cleanser.clean(trans_sent)
+                clean_trans_sent_flair = flair_anonymizer.anonymize(clean_trans_sent)
+                clean_trans_sent_flair_regex = regex_anonymizer.anonymize(clean_trans_sent_flair)
+                sents.append(clean_trans_sent_flair_regex)
             with open(os.path.join(OUTPUT_DIR, filename + '.extracted.anonymized.translated_' + from_lang + '_' +
                                                to_lang + '.txt'), encoding='utf-8', mode='w') as f2:
                 f2.write("\n".join(sents))

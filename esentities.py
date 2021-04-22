@@ -36,6 +36,6 @@ class ESEntities(Enum):
         elif ent == ESEntities.PASSPORT:
             return re.compile(r"[A-Za-z]{3}[0-9]{6}[A-Za-z]")
         elif ent == ESEntities.SOCIAL:
-            return re.compile(r"([S|s]eguretat [S|s]ocial|[S|s]eguridad Social)[\s]*:?[\s]*[0-9]+")
+            return re.compile(r"(SEGURIDAD[\s]*SOCIAL|[S|s]eguridad[\s]*[S|s]ocial)[\s]*:?[\s]*[0-9]+")
         elif ent == ESEntities.HISTORY:
-            return re.compile(r"[H|h]ist[o|ò]ria [c|C]l[í|i]nica[\s]*:[\s]*[a-zA-Z0-9]*[\s]*([N|n][ú|u]m[\.|ero])[ ]*[a-zA-Z0-9]*")
+            return re.compile(r"(HIST[O|Ó|Ò]RIA[\s]*CL[Í|I]NICA|[H|h]ist[o|ò]ria [c|C]l[í|i]nica)[\s]*:[\s]*[a-zA-Z0-9]*[\s]*([N|n][ú|u]m[\.|ero])*[ ]*[a-zA-Z0-9]*")
