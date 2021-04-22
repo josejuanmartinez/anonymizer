@@ -34,6 +34,6 @@ class FlairAnonymizer(BaseAnonymizer):
                 if ent[1] in self.entities:
                     logging.info(f"Found: {ent[0]} replaced with {ent[1]}")
                     text = text.replace(ent[0], ent[1])
-                else:
-                    logging.info(f"Found: {ent[0]} but not replaced (skipped)")
+                #else:
+                #    logging.info(f"Found: {ent[0]} but not replaced (skipped)")
         return text

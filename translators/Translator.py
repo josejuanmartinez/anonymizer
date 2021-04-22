@@ -22,7 +22,7 @@ class Translator:
             r = requests.get(url=TRANSLATOR_URL + "/translate", params=params)
 
             # extracting data in json format
-            return r.json()
+            return r.json()['responseData']['translatedText']
         except Exception as e:
             logging.error(e)
             return json.dumps({})

@@ -1,3 +1,4 @@
+import logging
 import os
 from io import BytesIO
 
@@ -12,6 +13,8 @@ from sentencizers.SpacySentencizer import SpacySentencizer
 from translators.Translator import Translator
 
 routes = web.RouteTableDef()
+
+logging.basicConfig(level=logging.INFO)
 
 
 @routes.post('/anonymizer/pdf/extract')
@@ -118,6 +121,7 @@ async def pdf_extract_anonymize_translate_bulk(request):
     if from_lang is None or to_lang is None:
         return web.HTTPBadRequest()
 
+    logging.info(f"Will translate from {from_lang} to {to_lang}")
     pdf_processor = PDFProcessor()
     sentencizer = SpacySentencizer()
     flair_anonymizer = FlairAnonymizer()
@@ -135,7 +139,8 @@ async def pdf_extract_anonymize_translate_bulk(request):
                 clean_sent = Cleanser.clean(str(sent))
                 clean_sent_flair = flair_anonymizer.anonymize(clean_sent)
                 clean_sent_flair_regex = regex_anonymizer.anonymize(clean_sent_flair)
-                sents.append(translator.translate(clean_sent_flair_regex))
+                clean_sent_flair_regex_translated = translator.translate(clean_sent_flair_regex)
+                sents.append(clean_sent_flair_regex_translated)
             with open(os.path.join(OUTPUT_DIR, filename + '.extracted.anonymized.translated_' + from_lang + '_' +
                                                to_lang + '.txt'), encoding='utf-8', mode='w') as f2:
                 f2.write("\n".join(sents))
