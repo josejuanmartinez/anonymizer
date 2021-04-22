@@ -136,8 +136,8 @@ async def pdf_extract_anonymize_translate_bulk(request):
                 clean_sent_flair = flair_anonymizer.anonymize(clean_sent)
                 clean_sent_flair_regex = regex_anonymizer.anonymize(clean_sent_flair)
                 sents.append(translator.translate(clean_sent_flair_regex))
-            with open(os.path.join(OUTPUT_DIR, filename + '.extracted.anonymized.translated_' +
-                                               from_lang + '_' + to_lang + '.txt'), encoding='utf-8', mode='w') as f2:
+            with open(os.path.join(OUTPUT_DIR, filename + '.extracted.anonymized.translated_' + from_lang + '_' +
+                                               to_lang + '.txt'), encoding='utf-8', mode='w') as f2:
                 f2.write("\n".join(sents))
 
     return web.Response(text="{\"status\": \"OK\"}")
