@@ -16,7 +16,7 @@ class Translator:
     def translate(self, text):
         try:
             params = {'langpair': "|".join([self.from_lang, self.to_lang]),
-                      'q': text}
+                      'q': text, 'markUnknown': 'no'}
 
             # sending get request and saving the response as response object
             r = requests.get(url=TRANSLATOR_URL + "/translate", params=params)
