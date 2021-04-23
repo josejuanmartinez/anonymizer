@@ -72,29 +72,43 @@ First, install and run Apertium [here](https://hub.docker.com/repository/docker/
 #### Create two folders: input (for original PDF to anonymizer) and output (to get the results)
 `sudo mkdir input output`
 
-#### Finally, instantiate a container using the imagem setting the input and output folders and connecting it to Apertium translation engine
+#### Finally, instantiate a container using the image setting the input and output folders and connecting it to Apertium translation engine
+
+From `anonymizer_docs` folder, where you should have `./input` and `./output` folders already created in previous steps, execute:
+
 `sudo docker run -d --name anonymizer -p "9090:9090" -v "${PWD}/input:/opt/anonymizer/input" -v "${PWD}/output:/opt/anonymizer/output" docker.io/josejuanmartineziqvia/anonymizer:0.1`
 
-### Prepare PDF files to anonymize
+### EXECUTION OF ANONYMIZATION
 
-Being in `input` folder created before:
+####Preparing PDF files 
 
-`sudo cp [path_to_example_pdf].pdf ./`
+Being in `anonymizer_docs` folder created before:
 
-### Request
+`sudo cp [path_to_example_pdf].pdf ./input/`
 
-http://[IP]:9090/anonymizer/pdf/extract/translate/anonymize/bulk?from_lang=cat&to_lang=spa
+Copy all the pdfs you need to anonymize.
+
+#### Request
+
+You can launch the anonymization using a HTTP request, for example, from your browser or from a HTTP command line (curl) to the following url:
+
+`http://162.44.148.238:9090/anonymizer/pdf/extract/translate/anonymize/bulk?from_lang=cat&to_lang=spa&host=http://apertium&port=2737`
 
 IMPORTANT: First time it will take a while, since it will download several language models. But it's only the first time. To see the progress:
 
 `sudo docker logs -f anonymizer`
 
-### Response
-If you see...
+#### Response
+If you see in your browser:
 
 `{'status': 'OK'}`
 
-You will have the anonymized .txt results in `output` folder.
+... that will mean that the process has successfully finished and you have the anonymized .txt results in `output` folder.
+
+You can follow the procress using `sudo docker logs -f anonymizer`
+
+Be patient, you are running 2 neural networks in a row inside a virtual environment with no GPU for X documents, so the process takes a while. Remember that the time for Linguamatics does not have anything to do with this and the performance is much higher in Production.
+
 
 ## DOCKER_COMPOSE INSTALLATION
 ### From docker hub
