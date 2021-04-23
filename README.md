@@ -21,6 +21,17 @@ Uses different regular expressions to manage other kind of (Spanish so far) enti
 NOTE: These entities have a LOW recall, since they are very document dependant. You must need to include new or fine-tune them.
 To do that, use `esentities.py` or create another file for another language (`enentities.py`, ...)
 
+## IMAGE BUILD TO UPLOAD TO DOCKER HUB
+Just go to ./docker and execute:
+`sudo docker-compose build`
+
+This will create an image. 
+
+To upload it to docker hub:
+
+`sudo docker push docker.io/josejuanmartineziqvia/anonymizer:0.1`
+
+
 ## INSTALLATION
 
 ## Apertium (for translation)
