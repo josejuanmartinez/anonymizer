@@ -20,4 +20,4 @@ entities = {
 NEWPAGE = '\n<<==NEWPAGE==>>\n'
 
 TRANSLATOR_PORT = '2737'
-TRANSLATOR_URL = f'http://localhost:{TRANSLATOR_PORT}'
+TRANSLATOR_URL = 'http://localhost'

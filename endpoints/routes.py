@@ -110,6 +110,14 @@ async def pdf_extract_anonymize_bulk(request):
 
 @routes.get('/anonymizer/pdf/extract/translate/anonymize/bulk')
 async def pdf_extract_anonymize_translate_bulk(request):
+    host = None
+    if 'host' in request.rel_url.query:
+        host = request.rel_url.query['host']
+
+    port = None
+    if 'port' in request.rel_url.query:
+        port = request.rel_url.query['port']
+
     from_lang = None
     if 'from_lang' in request.rel_url.query:
         from_lang = request.rel_url.query['from_lang']
@@ -126,7 +134,7 @@ async def pdf_extract_anonymize_translate_bulk(request):
     sentencizer = SpacySentencizer()
     flair_anonymizer = FlairAnonymizer()
     regex_anonymizer = RegexAnonymizer()
-    translator = Translator(from_lang, to_lang)
+    translator = Translator(from_lang, to_lang, host=host, port=port)
 
     for filename in os.listdir(INPUT_DIR):
         with open(os.path.join(INPUT_DIR, filename), 'rb') as f:
