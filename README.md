@@ -76,7 +76,7 @@ First, install and run Apertium [here](https://hub.docker.com/repository/docker/
 
 From `anonymizer_docs` folder, where you should have `./input` and `./output` folders already created in previous steps, execute:
 
-`sudo docker run -d --name anonymizer -p "9090:9090" -v "${PWD}/input:/opt/anonymizer/input" -v "${PWD}/output:/opt/anonymizer/output" docker.io/josejuanmartineziqvia/anonymizer:0.1`
+`sudo docker run -d --name anonymizer -p "9090:9090" --link "apertium" --expose "2737" -v "${PWD}/input:/opt/anonymizer/input" -v "${PWD}/output:/opt/anonymizer/output" docker.io/josejuanmartineziqvia/anonymizer:0.1`
 
 ### EXECUTION OF ANONYMIZATION
 
