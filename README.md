@@ -44,8 +44,16 @@ To upload it to docker hub:
 `sudo docker run -d --name apertium -p "2737:2737" docker.io/josejuanmartineziqvia/apertium`
 
 # Request
+To check that apertium is up and running you can:
 
-`http://{SERVER_IP}:2737/translate?langpair=cat|spa&q=Bon%20dia`
+1) Use browser, just typing the following url, replacing SERVER_IP with your server ip value:
+    `> http://{SERVER_IP}:2737/translate?langpair=cat|spa&q=Bon%20dia`
+
+2) Using command line, in the same server where docker is running:
+
+    `> wget "http://0.0.0.0:2737/translate?langpair=cat|spa&q=Bon%20dia" -O response.txt`
+
+    `> cat response.txt`
 
 # Response
 
