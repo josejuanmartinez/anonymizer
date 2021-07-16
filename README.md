@@ -39,7 +39,11 @@ To upload it to docker hub:
 
 # Installation
 
+First, pull the image from this repository:
+
 `sudo docker pull docker.io/josejuanmartineziqvia/apertium`
+
+Then, run the container:
 
 `sudo docker run -d --name apertium -p "2737:2737" docker.io/josejuanmartineziqvia/apertium`
 
@@ -88,7 +92,7 @@ From `anonymizer_docs` folder, where you should have `./input` and `./output` fo
 
 ### EXECUTION OF ANONYMIZATION
 
-####Preparing PDF files 
+#### Preparing PDF files 
 
 Being in `anonymizer_docs` folder created before:
 
@@ -98,28 +102,31 @@ Copy all the pdfs you need to anonymize.
 
 #### Request
 
-You can launch the anonymization using a HTTP request, for example, from your browser or from a HTTP command line (curl) to the following url:
+You can launch the anonymization using a HTTP request, for example:
 
-`http://162.44.148.238:9090/anonymizer/pdf/extract/translate/anonymize/bulk?from_lang=cat&to_lang=spa&host=http://apertium&port=2737`
+1) From your browser:
 
-IMPORTANT: First time it will take a while, since it will download several language models. But it's only the first time. To see the progress:
+`> http://[SERVER_IP]:9090/anonymizer/pdf/extract/translate/anonymize/bulk?from_lang=cat&to_lang=spa&host=http://apertium&port=2737`
+
+2) Using wget;
+
+`> wget "http://localhost:9090/anonymizer/pdf/extract/translate/anonymize/bulk?from_lang=cat&to_lang=spa&host=http://apertium&port=2737" -O response.txt`
+
+`> cat response.txt`
+
+IMPORTANT: First time it will take a while, since it will download several language models, some of the of about 1GB. But it's only the first time. To see the progress:
 
 `sudo docker logs -f anonymizer`
 
 #### Response
-If you see in your browser:
+You should see either in the browser or in response.txt, the following:
 
 `{'status': 'OK'}`
 
 ... that will mean that the process has successfully finished and you have the anonymized .txt results in `output` folder.
 
-You can follow the procress using `sudo docker logs -f anonymizer`
-
-Be patient, you are running 2 neural networks in a row inside a virtual environment with no GPU for X documents, so the process takes a while. Remember that the time for Linguamatics does not have anything to do with this and the performance is much higher in Production.
-
-
 ## DOCKER_COMPOSE INSTALLATION
-### From docker hub
+### From source code
 In `./`
 
 `sudo docker-compose up -d`
