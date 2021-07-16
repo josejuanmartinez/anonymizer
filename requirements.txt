@@ -18,7 +18,7 @@ flair==0.8.0
 
 
 # PDFExtractor
-PyPDF2~=1.26.0
+pdfplumber~=0.5.28
 
 # WebServer
 aiohttp~=3.7.4.post0

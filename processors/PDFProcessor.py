@@ -1,7 +1,6 @@
-import PyPDF2
-
 from cleanser.Cleanser import Cleanser
 from constants import NEWPAGE
+import pdfplumber
 
 
 class PDFProcessor:
@@ -9,10 +8,9 @@ class PDFProcessor:
         pass
 
     @staticmethod
-    def get_text(file):
+    def get_text_from_filename(filename):
         all_text = []
-        reader = PyPDF2.PdfFileReader(file)
-        for i in range(0, reader.getNumPages()):
-            all_text.append(Cleanser.clean(reader.getPage(i).extractText()))
-
+        with pdfplumber.open(filename) as pdf:
+            for page in range(0, len(pdf.pages)):
+                all_text.append(Cleanser.clean(pdf.pages[page].extract_text()))
         return NEWPAGE.join(all_text)
