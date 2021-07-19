@@ -16,6 +16,12 @@ routes = web.RouteTableDef()
 
 logging.basicConfig(level=logging.INFO)
 
+pdf_processor = PDFProcessor()
+sentencizer = SpacySentencizer()
+flair_anonymizer = FlairAnonymizer()
+regex_anonymizer = RegexAnonymizer()
+cleanser = Cleanser()
+
 
 @routes.post('/anonymizer/pdf/extract')
 async def pdf_extract(request):
@@ -31,14 +37,11 @@ async def pdf_extract(request):
 
     pdf_content = pdf.read()
 
-    pdf_processor = PDFProcessor()
-
     return web.Response(text=pdf_processor.get_text_from_file(BytesIO(pdf_content)))
 
 
 @routes.post('/anonymizer/pdf/extract/bulk')
 async def pdf_extract_bulk(request):
-    pdf_processor = PDFProcessor()
     for filename in os.listdir(INPUT_DIR):
         ext = os.path.splitext(filename)[-1].lower()
         if ext.lower() != '.pdf':
@@ -64,12 +67,6 @@ async def pdf_extract_anonymize(request):
 
     pdf_content = pdf.read()
 
-    pdf_processor = PDFProcessor()
-    cleanser = Cleanser()
-    sentencizer = SpacySentencizer()
-    flair_anonymizer = FlairAnonymizer()
-    regex_anonymizer = RegexAnonymizer()
-
     text = pdf_processor.get_text_from_file(BytesIO(pdf_content))
 
     sents = []
@@ -84,11 +81,6 @@ async def pdf_extract_anonymize(request):
 
 @routes.post('/anonymizer/pdf/extract/anonymize/bulk')
 async def pdf_extract_anonymize_bulk(request):
-    pdf_processor = PDFProcessor()
-    sentencizer = SpacySentencizer()
-    flair_anonymizer = FlairAnonymizer()
-    regex_anonymizer = RegexAnonymizer()
-
     for filename in os.listdir(INPUT_DIR):
         ext = os.path.splitext(filename)[-1].lower()
         if ext.lower() != '.pdf':
@@ -128,10 +120,6 @@ async def pdf_extract_anonymize_translate_bulk(request):
         return web.HTTPBadRequest()
 
     logging.info(f"Will translate from {from_lang} to {to_lang}")
-    pdf_processor = PDFProcessor()
-    sentencizer = SpacySentencizer()
-    flair_anonymizer = FlairAnonymizer()
-    regex_anonymizer = RegexAnonymizer()
     translator = Translator(from_lang, to_lang, host=host, port=port)
 
     for filename in os.listdir(INPUT_DIR):
@@ -165,10 +153,6 @@ async def txt_anonymize(request):
 
     text = files['text']
 
-    sentencizer = SpacySentencizer()
-    flair_anonymizer = FlairAnonymizer()
-    regex_anonymizer = RegexAnonymizer()
-
     sents = []
     for sent in sentencizer.sentencize(text):
         clean_sent = Cleanser.clean(str(sent))
@@ -190,9 +174,6 @@ async def txt_anonymize(request):
         raise web.HTTPBadRequest()
 
     text = files['text']
-
-    sentencizer = SpacySentencizer()
-    regex_anonymizer = RegexAnonymizer()
 
     sents = []
     for sent in sentencizer.sentencize(text):
