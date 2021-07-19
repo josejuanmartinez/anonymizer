@@ -1,1 +1,0 @@
-docker build -t docker.io/josejuanmartineziqvia/anonymizer:0.1 .
