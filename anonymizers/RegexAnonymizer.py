@@ -10,7 +10,8 @@ logging.basicConfig(level=logging.INFO)
 class RegexAnonymizer(BaseAnonymizer):
     def __init__(self):
         self.entities = [ESEntities.PHONES, ESEntities.PHONE, ESEntities.EMAIL, ESEntities.DOCUMENT, ESEntities.NIE,
-                         ESEntities.NIF, ESEntities.PASSPORT, ESEntities.SOCIAL, ESEntities.HISTORY]
+                         ESEntities.NIF, ESEntities.PASSPORT, ESEntities.SOCIAL, ESEntities.HISTORY, ESEntities.NUM,
+                         ESEntities.NAME]
         super().__init__()
 
     def anonymize(self, text):
