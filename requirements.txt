@@ -1,5 +1,6 @@
 # Install with trusted github permissions
 # sudo pip3 install --trusted-host github.com --trusted-host github-releases.githubusercontent.com -r requirements.txt
+# sudo pip3 install --trusted-host github.com --trusted-host github-releases.githubusercontent.com https://github.com/explosion/spacy-models/releases/download/es_core_news_sm-3.0.0/es_core_news_sm-3.0.0-py3-none-any.whl
 
 # SpacySentencizer
 spacy==3.0.5

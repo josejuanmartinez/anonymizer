@@ -18,7 +18,9 @@ class ESEntities(Enum):
     SOCIAL = 12,
     HISTORY = 13,
     NAME = 14,
-    NUM = 15
+    NUM = 15,
+    SEX = 16,
+    AGE = 17
 
     @classmethod
     def get_regex(cls, ent):
@@ -38,10 +40,14 @@ class ESEntities(Enum):
         elif ent == ESEntities.PASSPORT:
             return re.compile(r"[A-Za-z]{3}[0-9]{6}[A-Za-z]")
         elif ent == ESEntities.SOCIAL:
-            return re.compile(r"(SEGURIDAD[\s]*SOCIAL|[S|s]eguridad[\s]*[S|s]ocial)[\s]*:?[\s\n]*[0-9]+")
+            return re.compile(r"(SEGURIDAD[\s]*SOCIAL|[S|s]eguridad[\s]*[S|s]ocial)[\s]*:?[\s\n]*[0-9/-]+")
         elif ent == ESEntities.HISTORY:
             return re.compile(r"(HIST[O|Ó|Ò]RIA[\s]*CL[Í|I]NICA|[H|h]ist[o|ò]ria [c|C]l[í|i]nica)[\s]*:[\s]*[a-zA-Z0-9]*[\s]*([N|n][ú|u]m[\.|ero])*[ ]*[a-zA-Z0-9]*")
         elif ent == ESEntities.NUM:
-            return re.compile(r"(Num\.|Núm\.|num\.|N\.|n\.|Nº|nº)[\s\n]*:?[\s\n]*[0-9]*")
+            return re.compile(r"(Número|número|Num\.|Núm\.|num\.|núm.|N\.|n\.|Nº|nº)[\s\n]*:?[\s\n]*[0-9]*")
         elif ent == ESEntities.NAME:
-            return re.compile(r"(Nombre|Nom|nombre|nom|Apellidos|apellidos)[\s\n]*:?[\s\n]*[a-zA-Z,]*[^NUM]")
+            return re.compile(r"(Nombre|nombre|Apellidos|apellidos)[\s\n]*:?[\s\n]*[a-zA-Z, ]*")
+        elif ent == ESEntities.SEX:
+            return re.compile(r"(Sexo|sexo)[\s\n]*:?[\s\n]*[a-zA-Z]*")
+        elif ent == ESEntities.AGE:
+            return re.compile(r"(Edad|edad)[\s\n]*:?[\s\n]*[0-9]*")

@@ -20,7 +20,7 @@ class TestAnonimization(unittest.TestCase):
         pdf_processor = PDFProcessor()
 
         from_lang = 'cat'
-        to_lang = 'esp'
+        to_lang = 'spa'
 
         translator = Translator(from_lang, to_lang, host='http://162.44.148.238', port='2737')
 
