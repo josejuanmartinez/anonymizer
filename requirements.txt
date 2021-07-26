@@ -25,3 +25,6 @@ pdfplumber~=0.5.28
 aiohttp~=3.7.4.post0
 aiohttp-cors==0.7.0
 requests~=2.25.1
+
+# XML
+elementpath==2.2.3
