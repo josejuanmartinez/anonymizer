@@ -1,11 +1,24 @@
 # IQVIA ANONYMIZER
-In case of doubt, write to josejuan.martinez@iqvia.com
+## Requerirements
+- UNIX-based Operating System (CentOS, Ubuntu, RHEL, Fedora...)
+- Free disk space. 50GB will be enough, but 100GB is prefered.
+- RAM. 16GB will be enough, but 32GB is always prefered.
+
+For technical questions & support please write to josejuan.martinez@iqvia.com
 
 ## DOCKER INSTALLATION
 
-Make sure you have a docker hub account. It's easy and free. To get one, please visit https://hub.docker.com/
+Please, install the Docker library following these simple instructions:
+https://docs.docker.com/engine/install/
 
-Once you have an account in docker hub, login using command line:
+Choose the UNIX distribution. For example, for ubuntu it will be https://docs.docker.com/engine/install/ubuntu/
+
+#### Account in docker hub
+Make sure you have a docker hub account. This will allow you to download any docker software images you may need, including IQVIA's.
+It's easy and free. To get one, please visit https://hub.docker.com/
+
+#### Install docker library
+Once you have an account in docker hub and docker installed, login using command line:
 
 `sudo docker login`
 
