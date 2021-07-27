@@ -1,39 +1,17 @@
-# Hybrid Neural-Regexp Anonymizer of entities
-## Neural model
-Uses Flair 0.8 to anonymize:
-- PER
-- DATE
-- GPE
-- LOC
-- TIME
-
-NOTE: These entities have a ~0.9 of both recall and accuracy.
-
-## Regex model
-Uses different regular expressions to manage other kind of (Spanish so far) entities, as:
-- Phone numbers
-- Emails
-- NIE/NIF
-- Social Id's
-- Passports
-...
-  
-NOTE: These entities have a LOW recall, since they are very document dependant. You must need to include new or fine-tune them.
-To do that, use `esentities.py` or create another file for another language (`enentities.py`, ...)
-
-## IMAGE BUILD TO UPLOAD TO DOCKER HUB
-Just go to ./docker and execute:
-`sudo docker-compose build`
-
-This will create an image. 
-
-To upload it to docker hub:
-
-`sudo docker push docker.io/josejuanmartineziqvia/anonymizer:0.1`
+# IQVIA ANONYMIZER
+In case of doubt, write to josejuan.martinez@iqvia.com
 
 ## DOCKER INSTALLATION
 
-### Install Apertium (for translation)
+Make sure you have a docker hub account. It's easy and free. To get one, please visit https://hub.docker.com/
+
+Once you have an account in docker hub, login using command line:
+
+`sudo docker login`
+
+Enter your username and password and you are ready to go.
+
+### Install Apertium (for bilingual documents cat-esp)
 
 First, pull the image from this repository:
 
@@ -59,7 +37,7 @@ To check that apertium is up and running you can:
 
 `{"responseData": {"translatedText": "Buenos días"}, "responseDetails": null, "responseStatus": 200}`
 
-### Install anonymizer
+### Install the anonymizer
 
 First, pull the image from this repository:
 
@@ -84,11 +62,9 @@ From `anonymizer_docs` folder, where you should have `./input` and `./output` fo
 
 ### Preparing PDF files 
 
-Being in `anonymizer_docs` folder created before:
+Being in `anonymizer_docs` folder created before, copy all the pdfs you need to anonymize.
 
 `sudo cp [path_to_example_pdf].pdf ./input/`
-
-Copy all the pdfs you need to anonymize.
 
 ### Request
 
@@ -98,7 +74,7 @@ You can launch the anonymization using a HTTP request, for example:
 
 `> http://[SERVER_IP]:9090/anonymizer/pdf/extract/translate/anonymize/bulk?from_lang=cat&to_lang=spa&host=http://apertium&port=2737`
 
-2) Using wget;
+2) Using wget:
 
 `> wget "http://localhost:9090/anonymizer/pdf/extract/translate/anonymize/bulk?from_lang=cat&to_lang=spa&host=http://apertium&port=2737" -O response.txt`
 
@@ -114,21 +90,3 @@ You should see either in the browser or in response.txt, the following:
 `{'status': 'OK'}`
 
 ... that will mean that the process has successfully finished and you have the anonymized .txt results in `output` folder.
-
-## DOCKER_COMPOSE INSTALLATION
-### From source code
-In `./`
-
-`sudo docker-compose up -d`
-
-This will take the docker-compose.yaml in the root folder and download the model from docker hub
-
-### Construction mode
-In `./docker/`
-
-`sudo docker-compose up -d`
-
-This will build and tag the docker image locally
-
-
-
