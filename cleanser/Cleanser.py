@@ -1,4 +1,5 @@
 import re
+import html
 
 
 class Cleanser:
@@ -18,3 +19,7 @@ class Cleanser:
         text = re.sub(r' \)', ')', text)
         text = re.sub(r' \.', '.', text)
         return text
+
+    @staticmethod
+    def html_to_txt(text):
+        return html.unescape(text)
