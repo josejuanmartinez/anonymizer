@@ -7,12 +7,30 @@ logging.basicConfig(level=logging.INFO)
 
 
 class XMLRegionizer:
-    def __init__(self, first_region_regex, no_region_type):
+    """
+        Class that creates an XML with regions from a text file, based on a regexp.
+    """
+    def __init__(self, region_regex, no_region_type):
+        """
+            Instantiates a XMLRegionizer to create an XML with regions. One region is created each
+            time a string from a regular expression is found.
+
+            :param region_regex: Regular expression. Example: [T|t]umor\s?[0-9]+
+            :param no_region_type: Default name of the region (used if no region is found or is outside
+            the boundaries). Example: NO_TUMOR
+        """
         self.regions = []
-        self.region_regex = first_region_regex
+        self.region_regex = region_regex
         self.no_region_type = no_region_type
 
     def process(self, text, return_text=False):
+        """
+            Processes a plain text and the regionized XML, either as an XML object of ET library
+            or as a plain text.
+
+            :param text: source plain text to regionalize
+            :param return_text: Set to true if you want the XML text. If false, it will return a ET XML object
+        """
         xml = ET.Element('document')
         matches = []
         # Finding region matches
